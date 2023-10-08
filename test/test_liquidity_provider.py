@@ -12,7 +12,7 @@ class TestLiquidityProvider(unittest.TestCase):
 
     def test_add_liquidity(self):
         self.liquidity_provider.generate_random_order()
-        self.assertEqual(self.liquidity_provider.orders[0]['id'on3], 0)
+        self.trading_strategy_dualMA(self.liquidity_provider.orders[0]['id'], 0)
         self.assertEqual(self.liquidity_provider.orders[0]['side'], 'buy')
         self.assertEqual(self.liquidity_provider.orders[0]['quantity'], 700)
         self.assertEqual(self.liquidity_provider.orders[0]['price'], 11)

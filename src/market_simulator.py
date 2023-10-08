@@ -1,6 +1,7 @@
 '''
 Acts like exchange for placing orders.
 '''
+from random import randrange
 
 
 class MarketSimulator:
@@ -62,10 +63,13 @@ class MarketSimulator:
                     print('simulation mode')
                 print('Order amended')
 
-    def fill_all_orders(self):
+    def fill_all_orders(self, ratio=100):
         orders_to_be_removed = []
         for index, order in enumerate(self.orders):
-            order['status'] = 'filled'
+            if randrange(100) <= ratio:
+                order['status'] = 'filled'
+            else:
+                order['status'] = 'cancelled'
             orders_to_be_removed.append(index)
             if self.gw_2_om is not None:
                 self.gw_2_om.append(order.copy())
