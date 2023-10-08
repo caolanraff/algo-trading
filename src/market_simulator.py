@@ -9,6 +9,8 @@ class MarketSimulator:
         self.orders = []
         self.om_2_gw = om_2_gw
         self.gw_2_om = gw_2_om
+        #self.fill_ratio = 100
+        self.fill_ratio = 80
 
     def lookup_orders(self, order):
         count = 0
@@ -33,6 +35,7 @@ class MarketSimulator:
                 self.orders.append(order)
                 if self.gw_2_om is not None:
                     self.gw_2_om.append(order.copy())
+                    self.fill_all_orders()
                 else:
                     print('simulation mode')
                 return
@@ -63,10 +66,10 @@ class MarketSimulator:
                     print('simulation mode')
                 print('Order amended')
 
-    def fill_all_orders(self, ratio=100):
+    def fill_all_orders(self):
         orders_to_be_removed = []
         for index, order in enumerate(self.orders):
-            if randrange(100) <= ratio:
+            if randrange(100) <= self.fill_ratio:
                 order['status'] = 'filled'
             else:
                 order['status'] = 'cancelled'
